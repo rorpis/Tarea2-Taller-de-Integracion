@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h4>
+    <%= link_to like_submission_path(@submission), method: :put do %>
+      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+    <% end %>
+    <h3>
+      <%= @submission.title %>
+    </h3>
+    <br>
+    <%= @submission.lead %>
+    <br>
+    <br>
+    <%= @submission.body %>
+  </h4>
+  <p><%= @submission.get_upvotes.size %> likes, by <%= @submission.user.email %> | publicado el: <%= @submission.created_at.strftime("%d-%m-%y %H:%M") %> | <%= link_to "#{@submission.comments.count} comments", @submission %> </p>
+  <br>
+
+  <% if user_signed_in? %>
+    <%= simple_form_for [@submission, Comment.new] do |f| %>
+      <div class="field">
+        <%= f.label "Nombre: " %>
+        <%= f.text_field :title, required:true %>
+      </div>
+      <%= f.text_area :body, class: "form-control", required:true %>
+      <br>
+      <%= f.submit "Agregar comentario" %>
+    <% end %>
+  <% else %>
+    <h6>
+      <i>Debes estar logeado para poder comentar</i>
+  </h4>
+  <% end %>
+
+  <div id="comments">
+    <%= render :partial => @submission.comments %>
+  </div>
+</div>

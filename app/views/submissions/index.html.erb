@@ -1,0 +1,22 @@
+<table>
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <tr class="post">
+        <td>
+          <%= link_to like_submission_path(submission), method: :put do %>
+            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+          <% end %>
+
+          <%= link_to submission.title, submission, class: "title" %>
+          <br>
+          <%= submission.lead %>
+          <br>
+          <%= simple_format(submission.short_body) %>
+        </td>
+        <tr class="post">
+          <td> <p><%= submission.get_upvotes.size %> likes, by <%= submission.user.email %> | publicado el: <%= submission.created_at.strftime("%d-%m-%y %H:%M") %> | <%= link_to "#{submission.comments.count} comments", submission %> </p></td>
+        </tr>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
