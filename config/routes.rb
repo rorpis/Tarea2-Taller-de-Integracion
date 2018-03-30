@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   get '/submissions/list', to: 'submissions#list'
-  resources :submissions
+  resources :submissions, path: "news" do
+    resources :comments
+  end
   resources :comments
   devise_for :users
   resources :submissions do

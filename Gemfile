@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 
+gem 'grape'
 gem 'devise', '~> 4.2'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'acts_as_votable', '~> 0.10.0'

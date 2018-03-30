@@ -7,4 +7,10 @@ class Submission < ApplicationRecord
     	self.body.truncate(len)
   end
 
+  def as_json(options={})
+    super(:only => [:title,:lead],
+    :methods => [:short_body]
+    ).tap { |hash| hash["subtitle"] = hash.delete "lead" }
+  end
+
 end
